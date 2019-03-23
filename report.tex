@@ -25,7 +25,7 @@ The object of the game is to have the majority of disks turned to display your c
 Reversi was most recently marketed by Mattel under the trademark Othello. 
 
 \subsection{Original Version of History}
-The game Reversi was invented in 1883 by either of two Englishmen (each claiming the other to be a fraud), Lewis Waterman or John W. Mollett (or perhaps earlier by someone else entirely), and gained considerable popularity in England at the end of the nineteenth century. The game's first reliable mention is in the 21 August 1886 edition of The Saturday Review. Later mention includes an 1895 article in The New York Times: ``Reversi is something like Go Bang, and is played with 64 pieces.'' In 1893, the German games publisher Ravensburger started producing the game as one of its first titles. Two 18th-century continental European books dealing with a game that may or may not be Reversi are mentioned on page fourteen of the Spring 1989 Othello Quarterly, and there has been speculation, so far without documentation, that the game has older origins.
+The game Reversi was invented in 1883 by either of two Englishmen (each claiming the other to be a fraud), Lewis Waterman or John W. Mollett (or perhaps earlier by someone else entirely), and gained considerable popularity in England at the end of the nineteenth century\footnote{Wikipedia contributors. (2019, March 17). Reversi. In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 10:20, March 23, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Reversi&oldid=888167585}}. The game's first reliable mention is in the 21 August 1886 edition of The Saturday Review. Later mention includes an 1895 article in The New York Times: ``Reversi is something like Go Bang, and is played with 64 pieces.'' In 1893, the German games publisher Ravensburger started producing the game as one of its first titles. Two 18th-century continental European books dealing with a game that may or may not be Reversi are mentioned on page fourteen of the Spring 1989 Othello Quarterly, and there has been speculation, so far without documentation, that the game has older origins.
 
 \subsection{Modern Version of History}
 The modern version of the game — the most regularly used rule-set, and the one used in international tournaments — is marketed and recognized as Othello. It was patented in Japan in 1971 by Goro Hasegawa (autonym: Satoshi Hasegawa), then a 38-year-old salesman.
@@ -67,7 +67,7 @@ Good Othello computer programs play very strong against human opponents. This is
 Analysts have estimated the number of legal positions in Othello is at most $10^28$, and it has a game-tree complexity of approximately $10^58$. Mathematically, Othello still remains unsolved. Experts have not absolutely resolved what the outcome of a game will be where both sides use perfect play. However, analysis of thousands of high-quality games (most of them computer-generated) appears to lead to a reliable conclusion (pending actual proof if true) that, on the standard 8 by 8 board, perfect play on both sides results in a draw. When generalizing the game to play on an n by n board, the problem of determining if the first player has a winning move in a given position is PSPACE-complete. On 4 by 4 and 6 by 6 boards under perfect play, the second player wins. The first of these proofs is relatively trivial, and the second dates to around 1990. 
 
 \section{Object-oriented Programming}
-Object-oriented programming (OOP) is a programming paradigm based on the concept of ``objects'', which can contain data, in the form of fields (often known as attributes), and code, in the form of procedures (often known as methods). A feature of objects is an object's procedures that can access and often modify the data fields of the object with which they are associated (objects have a notion of ``this'' or ``self''). In OOP, computer programs are designed by making them out of objects that interact with one another. OOP languages are diverse, but the most popular ones are class-based, meaning that objects are instances of classes, which also determine their types. 
+Object-oriented programming (OOP) is a programming paradigm based on the concept of ``objects'' \footnote{Wikipedia contributors. (2019, February 27). Object-oriented programming. In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 10:22, March 23, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Object-oriented_programming&oldid=885274966}}, which can contain data, in the form of fields (often known as attributes), and code, in the form of procedures (often known as methods). A feature of objects is an object's procedures that can access and often modify the data fields of the object with which they are associated (objects have a notion of ``this'' or ``self''). In OOP, computer programs are designed by making them out of objects that interact with one another. OOP languages are diverse, but the most popular ones are class-based, meaning that objects are instances of classes, which also determine their types. 
 \par
 Many of the most widely used programming languages (such as C++, Object Pascal, Java, Python, etc.) are multi-paradigm and they support object-oriented programming to a greater or lesser degree, typically in combination with imperative, procedural programming. Significant object-oriented languages include Java, C++, C\#, Python, PHP, JavaScript, Ruby, Perl, Object Pascal, Objective-C, Dart, Swift, Scala, Common Lisp, and Smalltalk. 
 \subsection{Features of Object-oriented Programming}
@@ -88,7 +88,7 @@ In programming languages and type theory, polymorphism is the provision of a sin
 \par
 In C++ and Java, parametric polymorphism is commonly used.
 \subsection{Encapsulation}
-In object-oriented programming languages, encapsulation is used to refer to one of two related but distinct notions, and sometimes to the combination thereof: 
+In object-oriented programming languages, encapsulation is used to refer to one of two related but distinct notions, and sometimes to the combination thereof\footnote{Wikipedia contributors. (2019, February 3). Encapsulation (computer programming). In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 10:19, March 23, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Encapsulation_(computer_programming)&oldid=881507936}}: 
 \begin{enumerate}
 \item A language mechanism for restricting direct access to some of the object's components.
 \item A language construct that facilitates the bundling of data with the methods (or other functions) operating on that data.
@@ -133,7 +133,8 @@ In my version of implementation, an interface \emph{Playable} is designed to cha
 \subsection{Abstract classes}
 In my version of implementation, an abstract class \emph{Piece} is designed to characterize the pieces that can be placed on the board. For example, in the current implementation, a \emph{BlackPiece} class and a \emph{WhitePiece} concrete class are two classes that extends this abstract class. This abstract class makes the unified piece queries or place methods available no matter a black piece or a white piece is being placed. Furthermore, it may function more in the future if the strategy is changed so that there are two colors of the pieces are to be placed. Any kind of piece to be placed on the board can extend the \emph{Piece} abstract class.
 \subsection{Inheritance}
-The character of inheritance is widely adopted among the classes in the classes. As stated above, the classes like \emph{Piece} and the player classes all have inheritance relationships. By using inheritance, the methods of parent classes can be well-reused by the child classes and the method names are unified. Furthermore, inheritance makes polymorphism available.
+The character of inheritance is widely adopted among the classes in the classes\footnote{Wikipedia contributors. (2019, February 21). Inheritance (object-oriented programming). In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 10:22, March 23, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Inheritance_(object-oriented_programming)&oldid=884436146}
+}. As stated above, the classes like \emph{Piece} and the player classes all have inheritance relationships. By using inheritance, the methods of parent classes can be well-reused by the child classes and the method names are unified. Furthermore, inheritance makes polymorphism available.
 \subsection{Polymorphism}
 Thanks to the interfaces, the abstract classes and the inheritance relationships defined above, polymorphism is widely appeared in the program. For example, the following code snippet is an example of polymorphism displayed in this program, the code is in the \emph{placeable} method in the \emph{Computer} class:
 \begin{lstlisting}[language=java]
@@ -197,19 +198,19 @@ The results are shown as Figure \ref{5} and Figure \ref{6}.
 \begin{thebibliography}{A}
 
 \bibitem{1}
-Wikipedia contributors. (2018, December 24). Version control. In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 06:12, March 10, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Version_control&oldid=875227317}
+Wikipedia contributors. (2019, February 3). Encapsulation (computer programming). In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 10:19, March 23, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Encapsulation_(computer_programming)&oldid=881507936}
 
 \bibitem{2}
-Wikipedia contributors. (2019, March 10). Systems development life cycle. In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 06:13, March 10, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Systems_development_life_cycle&oldid=887015682}
+Wikipedia contributors. (2019, March 17). Reversi. In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 10:20, March 23, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Reversi&oldid=888167585}
 
 \bibitem{3}
-Stolen, L. H. (1999). Distributed control system. \emph{international telecommunications energy conference.}
+Wikipedia contributors. (2019, March 15). Polymorphism (computer science). In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 10:21, March 23, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Polymorphism_(computer_science)&oldid=887878749}
 
 \bibitem{4}
-Murayama, T. (1991). Distributed Control System. \emph{international conference on advanced robotics robots in unstructured environments}.
+Wikipedia contributors. (2019, February 27). Object-oriented programming. In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 10:22, March 23, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Object-oriented_programming&oldid=885274966}
 
 \bibitem{5}
-Wikipedia contributors. (2019, March 6). Distributed control system. In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 06:18, March 10, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Distributed_control_system&oldid=886468871}
+Wikipedia contributors. (2019, February 21). Inheritance (object-oriented programming). In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 10:22, March 23, 2019, from \url{https://en.wikipedia.org/w/index.php?title=Inheritance_(object-oriented_programming)&oldid=884436146}
 
 \end{thebibliography}
 \end{document} 
