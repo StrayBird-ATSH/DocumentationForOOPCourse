@@ -20,7 +20,7 @@
 \section{C/C++ Compiling Process}
 
 \subsection{Overall process of compiling}
-Compiling a source code file in C++ is a four-step process.\footnote{ \url{http://faculty.cs.niu.edu/mcmahon/CS241/Notes/compile.html}}
+Compiling a source code file in C++ is a four-step process.\footnote{Referenced from the website of \url{http://faculty.cs.niu.edu/mcmahon/CS241/Notes/compile.html} on April 18, 2019}
  For example, if you have a C++ source code file named \emph{prog1.cpp} and you execute the compile command
  \begin{lstlisting}[language=bash]
 g++ -Wall -std=c++11 -o prog1 prog1.cpp
@@ -94,7 +94,7 @@ Preprocessors can be divided into different types: lexical preprocessors, syntac
 \subsection{Lexical preprocessors}
 Lexical preprocessors are the lowest-level of preprocessors as they only require lexical analysis, that is, they operate on the source text, prior to any parsing, by performing simple substitution of tokenized character sequences for other tokenized character sequences, according to user-defined rules. They typically perform macro substitution, textual inclusion of other files, and conditional compilation or inclusion. 
 \par
-The most common example of this is the C preprocessor, which takes lines beginning with '\#' as directives. Because it knows nothing about the underlying language, its use has been criticized and many of its features built directly into other languages. For example, macros replaced with aggressive inlining and templates, includes with compile-time imports (this requires the preservation of type information in the object code, making this feature impossible to retrofit into a language); conditional compilation is effectively accomplished with if-then-else and dead code elimination in some languages. However, a key point to remember is that all preprocessor directives should start on a new line. 
+The most common example of this is the C preprocessor, which takes lines beginning with `\#' as directives. Because it knows nothing about the underlying language, its use has been criticized and many of its features built directly into other languages. For example, macros replaced with aggressive inlining and templates, includes with compile-time imports (this requires the preservation of type information in the object code, making this feature impossible to retrofit into a language); conditional compilation is effectively accomplished with if-then-else and dead code elimination in some languages. However, a key point to remember is that all preprocessor directives should start on a new line. 
 \par
 Other lexical preprocessors include the general-purpose m4, most commonly used in cross-platform build systems such as autoconf, and GEMA, an open source macro processor which operates on patterns of context. 
 
@@ -189,7 +189,7 @@ Because they can exhaust available system memory as an application runs, memory 
 \subsection{Tools adopted for analysis: Valgrind}
 Valgrind is an instrumentation framework for building dynamic analysis tools. There are Valgrind tools that can automatically detect many memory management and threading bugs, and profile your programs in detail. You can also use Valgrind to build new tools. 
 \par
-The Valgrind distribution currently includes six production-quality tools: a memory error detector, two thread error detectors, a cache and branch-prediction profiler, a call-graph generating cache and branch-prediction profiler, and a heap profiler. It also includes three experimental tools: a stack/global array overrun detector, a second heap profiler that examines how heap blocks are used, and a SimPoint basic block vector generator. It runs on the following platforms: X86/Linux, AMD64/Linux, ARM/Linux, ARM64/Linux, PPC32/Linux, PPC64/Linux, PPC64LE/Linux, S390X/Linux, MIPS32/Linux, MIPS64/Linux, X86/Solaris, AMD64/Solaris, ARM/Android (2.3.x and later), ARM64/Android, X86/Android (4.0 and later), MIPS32/Android, X86/Darwin and AMD64/Darwin (Mac OS X 10.12).
+The Valgrind distribution currently includes six production-quality tools\footnote{Referenced from the website of Valgrind on April 18, 2019: \url{http://valgrind.org}}: a memory error detector, two thread error detectors, a cache and branch-prediction profiler, a call-graph generating cache and branch-prediction profiler, and a heap profiler. It also includes three experimental tools: a stack/global array overrun detector, a second heap profiler that examines how heap blocks are used, and a SimPoint basic block vector generator. It runs on the following platforms: X86/Linux, AMD64/Linux, ARM/Linux, ARM64/Linux, PPC32/Linux, PPC64/Linux, PPC64LE/Linux, S390X/Linux, MIPS32/Linux, MIPS64/Linux, X86/Solaris, AMD64/Solaris, ARM/Android (2.3.x and later), ARM64/Android, X86/Android (4.0 and later), MIPS32/Android, X86/Darwin and AMD64/Darwin (Mac OS X 10.12).
 \par
 Valgrind is Open Source / Free Software, and is freely available under the GNU General Public License, version 2.
 \par
