@@ -84,24 +84,77 @@ The use of the word “object” to describe chunks of machine code is an unfort
 The \emph{linker} combines a list of object modules into an executable program that can be loaded and run by the operating system. When a function in one object module makes a reference to a function or variable in another object module, the linker resolves these references; it makes sure that all the external functions and data you claimed existed during compilation do exist. The linker also adds a special object module to perform start-up activities. 
 \par
 The linker can search through special files called \emph{libraries} in order to resolve all its references. A library contains a collection of object modules in a single file. A library is created and maintained by a program called a \emph{librarian}. 
-\section{C/C++ Preprocessing}
-
+\section{Preprocessing}
 \subsection{The need of preprocessing}
-
+In computer science, a \textbf{preprocessor} is a program that processes its input data to produce output that is used as input to another program. The output is said to be a \textbf{preprocessed} form of the input data, which is often used by some subsequent programs like compilers. The amount and kind of processing done depends on the nature of the preprocessor; some preprocessors are only capable of performing relatively simple textual substitutions and macro expansions, while others have the power of full-fledged programming languages. 
+A common example from computer programming is the processing performed on source code before the next step of compilation. In some computer languages (e.g., C and PL/I) there is a phase of translation known as \emph{preprocessing}. It can also include macro processing, file inclusion and language extensions. 
 
 \subsection{Different preprocessing algorithms}
+Preprocessors can be divided into different types: lexical preprocessors, syntactic preprocessors and general purpose preprocessors. Each type will be further discussed in the following subsections.
+\subsection{Lexical preprocessors}
+Lexical preprocessors are the lowest-level of preprocessors as they only require lexical analysis, that is, they operate on the source text, prior to any parsing, by performing simple substitution of tokenized character sequences for other tokenized character sequences, according to user-defined rules. They typically perform macro substitution, textual inclusion of other files, and conditional compilation or inclusion. 
+\par
+The most common example of this is the C preprocessor, which takes lines beginning with '\#' as directives. Because it knows nothing about the underlying language, its use has been criticized and many of its features built directly into other languages. For example, macros replaced with aggressive inlining and templates, includes with compile-time imports (this requires the preservation of type information in the object code, making this feature impossible to retrofit into a language); conditional compilation is effectively accomplished with if-then-else and dead code elimination in some languages. However, a key point to remember is that all preprocessor directives should start on a new line. 
+\par
+Other lexical preprocessors include the general-purpose m4, most commonly used in cross-platform build systems such as autoconf, and GEMA, an open source macro processor which operates on patterns of context. 
 
+\subsection{Syntactic preprocessors}
+Syntactic preprocessors were introduced with the Lisp family of languages. Their role is to transform syntax trees according to a number of user-defined rules. For some programming languages, the rules are written in the same language as the program (compile-time reflection). This is the case with Lisp and OCaml. Some other languages rely on a fully external language to define the transformations, such as the XSLT preprocessor for XML, or its statically typed counterpart CDuce.
+\par
+Syntactic preprocessors are typically used to customize the syntax of a language, extend a language by adding new primitives, or embed a domain-specific programming language (DSL) inside a general purpose language. 
 
+\subsection{General purpose preprocessor}
+Most preprocessors are specific to a particular data processing task (e.g., compiling the C language). A preprocessor may be promoted as being \emph{general purpose}, meaning that it is not aimed at a specific usage or programming language, and is intended to be used for a wide variety of text processing tasks. 
+\par
+M4 is probably the most well known example of such a general purpose preprocessor, although the C preprocessor is sometimes used in a non-C specific role.
 \subsection{Preprocessing algorithm utilized by the current g++}
-
-
+The \textbf{C preprocessor} or \textbf{cpp} is the macro preprocessor for the C and C++ computer programming languages. The preprocessor provides the ability for the inclusion of header files, macro expansions, conditional compilation, and line control. 
+\par
+In many C implementations, it is a separate program invoked by the compiler as the first part of translation. 
+\par
+The language of preprocessor directives is only weakly related to the grammar of C, and so is sometimes used to process other kinds of text files. 
+\par
+Preprocessing is defined by the first four (of eight) \emph{phases of translation} specified in the C Standard. 
+\begin{enumerate}
+\item
+Trigraph replacement: The preprocessor replaces trigraph sequences with the characters they represent.
+\item
+Line splicing: Physical source lines that are continued with escaped newline sequences are \emph{spliced} to form logical lines.
+\item
+Tokenization: The preprocessor breaks the result into \emph{preprocessing tokens} and whitespace. It replaces comments with whitespace.
+\item
+Macro expansion and directive handling: Preprocessing directive lines, including file inclusion and conditional compilation, are executed. The preprocessor simultaneously expands macros and, in the 1999 version of the C standard, handles \textbf{\_Pragma} operators.
+\end{enumerate}
+\par
+However, in this lab we are not required to accomplish all the steps of the C preprocessor program and the test case only cover a small part of the required tasks of a C/C++ preprocessor. The details of this lab are shown in the consequent chapters.
 \chapter{Specifications of This Lab}
-\section{Regulations in the preprocessing process}
-
+\section{The description of this lab}
+The experiment requires a source code preprocessor to implement precompilation of macro directives in the code file. The preprocessor will process the macro definitions in the code before the code is compiled. Common instructions are: \#include, \#define, \#undef, \#ifdef, \#ifndef, \#if, \#endif and so on.
+\par
+You can use \emph{g++ -E test1.cpp > output.cpp} to see the code after \emph{test1.cpp} is precompiled in \emph{output.cpp}. In this lab, you need to implement a precompiled processor (without needing to deal with the C++ standard library) to handle instruction precompilation in simple scenarios.
+\section{Specifications of this lab}
+\begin{enumerate}
+\item
+Implementation: In the lab we need to write our code in \emph{lab2.cpp}. \emph{lab2.cpp} provides an entry function, we need to implement our code at this entry location.
+\item
+Test: There are two cpp test files in the test folder. \emph{Test1.cpp} is very simple and can help us debug at an early stage. \emph{Test2.cpp} is relatively complex and requires us to carefully identify the various macro processing scenarios.
+\item
+Run: First we need to compile \emph{lab2.cpp} (compiled with c++11 standard), and run the compiled file. After running, two \emph{test.out.cpp} files are generated in the test folder. Then run the \emph{run\_tests.sh} file in the test folder and make sure we are in the test directory before running this file.
+\end{enumerate}
 \section{Test cases designed in the lab}
-
-
-\section{Other specifications of the programming}
+The test cases in this lab are designed to check the following directives.
+\begin{itemize}
+\item \#include – 10\% (do not need to deal with \textbf{\#include "iostream"})
+\item \#define (check1 to check5)– 10\%
+\item \#undef – 10\%
+\item \#ifdef – 10\%
+\item \#else – 10\%
+\item \#ifndef – 10\%
+\item \#if – 10\%
+\item \#define function(PART 2) – 10\%
+\item \#define function(PART 3) – 10\% (for 5\% and \#\# processing, \_\# and \#\# can be processed as long as they can pass the test file)
+\item \textbf{No memory leaks - 10\%}
+\end{itemize}
 
 \chapter{Structure and  the OO Ideas Adopted}
 \section{Objected-oriented ideas adopted in the implementation}
