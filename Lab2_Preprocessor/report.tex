@@ -69,14 +69,21 @@ The entire process for compiling is shown in the figure \ref{1}
 \end{enumerate}
 
 \subsection{Preprocessing}
+To program in C and C++, you need to understand the steps and tools in the compilation process. Some languages (C and C++, in particular) start compilation by running a \emph{preprocessor} on the source code. The preprocessor is a simple program that replaces patterns in the source code with other patterns the programmer has defined (using \emph{preprocessor directives}). Preprocessor directives are used to save typing and to increase the readability of the code. However, from the author of the book TIC, the design of C++ is meant to discourage much of the use of the preprocessor, since it can cause subtle bugs. The pre-processed code is often written to an intermediate file. 
 \subsection{Parsing}
-
+Compilers usually do their work in two passes. The first pass \emph{parses} the pre-processed code. The compiler breaks the source code into small units and organizes it into a structure called a \emph{tree}. In the expression “\textbf{A + B}” the elements ‘\textbf{A}’, ‘\textbf{+},’ and ‘\textbf{B}’ are leaves on the parse tree. 
 \subsection{Global optimization}
-
-
+A \emph{global optimizer} is sometimes used between the first and second passes to produce smaller, faster code. 
 \subsection{Code generation}
+In the second pass, the \emph{code generator} walks through the parse tree and generates either assembly language code or machine code for the nodes of the tree. If the code generator creates assembly code, the assembler must then be run. The end result in both cases is an object module (a file that typically has an extension of \textbf{.o} or \textbf{.obj}).
 \subsection{Peehole optimization}
+ A \emph{peephole optimizer} is sometimes used in the second pass to look for pieces of code containing redundant assembly-language statements. 
 \subsection{Linking}
+The use of the word “object” to describe chunks of machine code is an unfortunate artifact. The word came into use before objectoriented programming was in general use. “Object” is used in the same sense as “goal” when discussing compilation, while in objectoriented programming it means “a thing with boundaries.” 
+\par
+The \emph{linker} combines a list of object modules into an executable program that can be loaded and run by the operating system. When a function in one object module makes a reference to a function or variable in another object module, the linker resolves these references; it makes sure that all the external functions and data you claimed existed during compilation do exist. The linker also adds a special object module to perform start-up activities. 
+\par
+The linker can search through special files called \emph{libraries} in order to resolve all its references. A library contains a collection of object modules in a single file. A library is created and maintained by a program called a \emph{librarian}. 
 \section{C/C++ Preprocessing}
 
 \subsection{The need of preprocessing}
