@@ -159,29 +159,48 @@ The test cases in this lab are designed to check the following directives.
 \chapter{Structure and  the OO Ideas Adopted}
 \section{Objected-oriented ideas adopted in the implementation}
 \subsection{Encapsulation}
-
-
+Encapsulation \emph{is one of the fundamentals} of OOP (object-oriented programming). It refers to the bundling of data with the methods that operate on that data. Encapsulation is \emph{used to hide the values or state of a structured data object inside a class}, preventing unauthorized parties' direct access to them. Publicly accessible methods are generally provided in the class (so-called \emph{getters} and \emph{setters}) to access the values, and other client classes call these methods to retrieve and modify the values within the object. 
+This mechanism is not unique to object-oriented programming. Implementations of abstract data types, e.g. modules, offer a similar form of encapsulation. This similarity stems from the fact that both notions rely on the same mathematical fundamental of an existential type.
+\subsection{Encapsulated data structure in this lab}
+The encapsulation result of the class is shown as Figure \ref{2}. From the structure, we can see that only the necessary constructor, destructor and the entry method \emph{pre\_process} are \textbf{public}. All the class fields and the other helper methods are \textbf{private}.
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.6]{structure.png}
+  \caption{Encapsulated class structure}\label{2}
+\end{figure}
 \chapter{Running Result of My Implementation}
 The following screenshots are the tests that are identical to the steps in the requirement documentation and proves that my version of implementation functions identical to the standard version.
 \section{Test result of the testcases}
-The results are shown as Figure \ref{2}. 
-
+The results are shown as Figure \ref{3}. The \emph{out} processed files are in the \emph{test} sub folder.
 \begin{figure}
   \centering
   \includegraphics[width=12cm]{shell.png}
-  \caption{Testcase Result}\label{2}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=12cm]{mem.png}
-  \caption{Memory Leak Check}\label{2}
+  \caption{Testcase Result}\label{3}
 \end{figure}
 
 \chapter{Memory Leak}
 \section{Potential Memory Leak}
+In computer science, a \textbf{memory leak} is a type of resource leak that occurs when a computer program incorrectly manages memory allocations in such a way that memory which is no longer needed is not released. A memory leak may also happen when an object is stored in memory but cannot be accessed by the running code. A memory leak has symptoms similar to a number of other problems and generally can only be diagnosed by a programmer with access to the programs' source code. 
+\par
+A space leak occurs when a computer program uses more memory than necessary. In contrast to memory leaks, where the leaked memory is never released, the memory consumed by a space leak is released, but later than expected.
+\par
+Because they can exhaust available system memory as an application runs, memory leaks are often the cause of or a contributing factor to software aging.
 \section{Prove of Free from Memory Leak in my Implementation}
-
+\subsection{Tools adopted for analysis: Valgrind}
+Valgrind is an instrumentation framework for building dynamic analysis tools. There are Valgrind tools that can automatically detect many memory management and threading bugs, and profile your programs in detail. You can also use Valgrind to build new tools. 
+\par
+The Valgrind distribution currently includes six production-quality tools: a memory error detector, two thread error detectors, a cache and branch-prediction profiler, a call-graph generating cache and branch-prediction profiler, and a heap profiler. It also includes three experimental tools: a stack/global array overrun detector, a second heap profiler that examines how heap blocks are used, and a SimPoint basic block vector generator. It runs on the following platforms: X86/Linux, AMD64/Linux, ARM/Linux, ARM64/Linux, PPC32/Linux, PPC64/Linux, PPC64LE/Linux, S390X/Linux, MIPS32/Linux, MIPS64/Linux, X86/Solaris, AMD64/Solaris, ARM/Android (2.3.x and later), ARM64/Android, X86/Android (4.0 and later), MIPS32/Android, X86/Darwin and AMD64/Darwin (Mac OS X 10.12).
+\par
+Valgrind is Open Source / Free Software, and is freely available under the GNU General Public License, version 2.
+\par
+In this lab, I only used the memory check tool to analyze whether there are any potential memory leaks in my application.
+\subsection{Result of the memory check}
+From Figure \ref{4} above, we can see that there is no memory leak found in my application.
+\begin{figure}
+  \centering
+  \includegraphics[width=12cm]{mem.png}
+  \caption{Memory Leak Check Result: No memory leak found}\label{4}
+\end{figure}
 \begin{thebibliography}{A}
 
 \bibitem{1}
