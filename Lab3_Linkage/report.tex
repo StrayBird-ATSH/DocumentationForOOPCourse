@@ -129,7 +129,97 @@ Macro expansion and directive handling: Preprocessing directive lines, including
 However, in this lab we are not required to accomplish all the steps of the C preprocessor program and the test case only cover a small part of the required tasks of a C/C++ preprocessor. The details of this lab are shown in the consequent chapters.
 \chapter{Tasks of This Lab}
 \section{Understanding Internal and External Linkage}
-%
+\subsection{Requirements}
+In this part, we are going to analyze the running result of the following short program and will try to make some subtle modifications whose change will result in the complete change of the result.
+The codes are shown below.
+
+\subsubsection{header.h}
+\begin{lstlisting}[language=C++]
+#ifndef LAB3_HEAER_H
+#define LAB3_HEAER_H
+
+static int variable = 0;
+extern int variable2;
+#endif //LAB3_HEAER_H
+
+\end{lstlisting}
+
+
+\subsubsection{file1.h}
+\begin{lstlisting}[language=C++]
+#ifndef LAB3_FILE1_H
+#define LAB3_FILE1_H
+void function1();
+
+#endif //LAB3_FILE1_H
+
+\end{lstlisting}
+
+\subsubsection{file2.h}
+\begin{lstlisting}[language=C++]
+#ifndef LAB3_FILE2_H
+#define LAB3_FILE2_H
+void function2();
+
+#endif //LAB3_FILE2_H
+
+\end{lstlisting}
+
+
+\subsubsection{file1.cpp}
+\begin{lstlisting}[language=C++]
+#include "header.h"
+
+void function1() {
+    variable = 1;
+    variable2 = 1;
+}
+\end{lstlisting}
+
+\subsubsection{file2.cpp}
+\begin{lstlisting}[language=C++]
+#include "header.h"
+void function2() {
+    variable = 2;
+    variable2 = 2;
+
+}
+\end{lstlisting}
+
+\subsubsection{main.cpp}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+#include "header.h"
+#include "file1.h"
+#include "file2.h"
+int variable2;
+
+int main() {
+    function1();
+    function2();
+
+    std::cout << variable << std::endl;
+    std::cout << variable2 << std::endl;
+    return 0;
+}
+\end{lstlisting}
+
+
+
+\subsection{Execution result}
+The result of the execution is shown in the Figure \ref{1} below.
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{result1.PNG}
+  \caption{Execute Results}\label{1}
+\end{figure}
+\subsection{Analysis for the result of static variable}
+From the C++ language standards, we can know that the \emph{static} keyword has different implications and effects in two different occasions. In this project, the keyword appears before the definition of the global variable outside from any methods. In this case, the \emph{static} keyword has the effect that the variable is only accessible in the specified file, i.e. having a \emph{file scope}.
+\par
+More specifically, in this project there are three \textbf{cpp} files in this project, each of them including the \emph{header.h} header file where a static variable is declared. In this case, each of the three files has a version of the static variable \emph{variable}. Therefore, the methods \emph{function1} and \emph{function2} will have no effect to the variable \emph{variable} in the \emph{main} method. Hence, the printing result is unchanged.
+\subsection{Analysis for the result of global variable}
+
 
 
 
