@@ -218,16 +218,12 @@ The result of the execution is shown in the Figure \ref{1} below.
 From the C++ language standards, we can know that the \emph{static} keyword has different implications and effects in two different occasions. In this project, the keyword appears before the definition of the global variable outside from any methods. In this case, the \emph{static} keyword has the effect that the variable is only accessible in the specified file, i.e. having a \emph{file scope}.
 \par
 More specifically, in this project there are three \textbf{cpp} files in this project, each of them including the \emph{header.h} header file where a static variable is declared. In this case, each of the three files has a version of the static variable \emph{variable}. Therefore, the methods \emph{function1} and \emph{function2} will have no effect to the variable \emph{variable} in the \emph{main} method. Hence, the printing result is unchanged.
+
 \subsection{Analysis for the result of global variable}
-
-
-
-
-
-
-The experiment requires a source code preprocessor to implement precompilation of macro directives in the code file. The preprocessor will process the macro definitions in the code before the code is compiled. Common instructions are: \#include, \#define, \#undef, \#ifdef, \#ifndef, \#if, \#endif and so on.
+As to another part of this lab, the printing result of \emph{variable2}, is a typical example of a global variable. Nevertheless, one slightly point making the analysis more complex is that the \emph{external} keyword is used to make the global variable declared and defined at different places. 
 \par
-You can use \emph{g++ -E test1.cpp > output.cpp} to see the code after \emph{test1.cpp} is precompiled in \emph{output.cpp}. In this lab, you need to implement a precompiled processor (without needing to deal with the C++ standard library) to handle instruction precompilation in simple scenarios.
+More specifically, in this project, the variable \emph{variable2} is declared in \emph{header.h} with an \emph{external} keyword, indicating that this variable will be defined somewhere else in this project. Then in the file \emph{main.cpp} this variable is defined. Therefore, this is a typical example of global variable and all the functions are modifying the same version of the variable. Therefore, the \emph{main} function will print the result after being changed in the other functions.
+
 \section{Understanding Name Space}
 \begin{enumerate}
 \item
