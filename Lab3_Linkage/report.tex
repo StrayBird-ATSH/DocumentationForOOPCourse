@@ -224,6 +224,31 @@ As to another part of this lab, the printing result of \emph{variable2}, is a ty
 \par
 More specifically, in this project, the variable \emph{variable2} is declared in \emph{header.h} with an \emph{external} keyword, indicating that this variable will be defined somewhere else in this project. Then in the file \emph{main.cpp} this variable is defined. Therefore, this is a typical example of global variable and all the functions are modifying the same version of the variable. Therefore, the \emph{main} function will print the result after being changed in the other functions.
 
+\subsection{Task 1.2: External declaration with definition at the same place}
+The result of the change is shown in the Figure \ref{2} below, indicating an compiling error.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{Onetow.PNG}
+  \caption{Execute Results of Task 1.2}\label{2}
+\end{figure}
+
+
+As per have stated above, an \emph{extern} keyword indicates that this variable is defined somewhere else in this file, hence it cannot be used the same time as definition. Therefore, such change will lead to a compiling error.
+\subsection{Task 1.3: External declaration without definition}
+
+The result of the change is shown in the Figure \ref{3} below, indicating an compiling error.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{Onethree.PNG}
+  \caption{Execute Results of Task 1.3}\label{3}
+\end{figure}
+
+
+As per have stated above, an \emph{extern} keyword indicates that this variable is defined somewhere else in this file, hence it will cause a compiling error if no definition is made through out the project file.
 \section{Understanding Name Space}
 \begin{enumerate}
 \item
