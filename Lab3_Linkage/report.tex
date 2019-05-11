@@ -250,6 +250,19 @@ The result of the change is shown in the Figure \ref{3} below, indicating an com
 
 As per have stated above, an \emph{extern} keyword indicates that this variable is defined somewhere else in this file, hence it will cause a compiling error if no definition is made through out the project file.
 \section{Understanding Name Space}
+\subsection{Task 1.2 Duplicate variable naming in separate name spaces}
+In this task, we are going to use the name space mechanism, create two variables with the same name but different values and print them.
+\par
+Here in my implementation, I declared two name spaces called \textbf{a} and \textbf{b} separately and then a variable named \textbf{a} in each name space but different value. Then in the \emph{main} method, these two variables are printed separately, we can see the result that they have different values printed. The result is shown in the Figure \ref{4} below.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{TwoOne.PNG}
+  \caption{Execute Results of Task 2.1}\label{4}
+\end{figure}
+
+
 \begin{enumerate}
 \item
 Implementation: In the lab we need to write our code in \emph{lab2.cpp}. \emph{lab2.cpp} provides an entry function, we need to implement our code at this entry location.
