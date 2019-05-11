@@ -172,12 +172,55 @@ Here in my implementation, I declared a name space called \textbf{a} in two sepa
 \subsection{Introduction}
 Starting with ECMAScript 2015, JavaScript has a concept of modules. TypeScript shares this concept.
 \par
-Modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported using one of the \textcolor[rgb]{0.749,0.255,0.29}{export} forms. Conversely, to consume a variable, function, class, interface, etc. exported from a different module, it has to be imported using one of the \textcolor[rgb]{0.749,0.255,0.29}{import} forms.
+Modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported using one of the \emph{export} forms. Conversely, to consume a variable, function, class, interface, etc. exported from a different module, it has to be imported using one of the \emph{import} forms.
 \par
 Modules are declarative; the relationships between modules are specified in terms of imports and exports at the file level.
 Modules import one another using a module loader. At runtime the module loader is responsible for locating and executing all dependencies of a module before executing it. Well-known modules loaders used in JavaScript are the CommonJS module loader for Node.js and require.js for Web applications.
 \par
-In TypeScript, just as in ECMAScript 2015, any file containing a top-level \textcolor[rgb]{0.749,0.255,0.29}{\textbf{import}} or \textcolor[rgb]{0.749,0.255,0.29}{\textbf{export}} is considered a module. Conversely, a file without any top-level \textcolor[rgb]{0.749,0.255,0.29}{\textbf{import}} or \textcolor[rgb]{0.749,0.255,0.29}{\textbf{export}} declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well).
+In TypeScript, just as in ECMAScript 2015, any file containing a top-level \emph{import} or \emph{export} is considered a module. Conversely, a file without any top-level \emph{import} or \emph{export} declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well).
+\subsection{Export}
+\subsubsection{Exporting a declaration}
+Any declaration (such as a variable, function, class, type alias, or interface) can be exported by adding the \emph{export} keyword.
+\subsubsection{Export statements}
+Export statements are handy when exports need to be renamed for consumers.
+\subsubsection{Re-exports}
+Often modules extend other modules, and partially expose some of their features. A re-export does not import it locally, or introduce a local variable.
+\par
+Optionally, a module can wrap one or more modules and combine all their exports using \emph{export * from ``module''} syntax.
+\subsection{Import}
+Importing is just about as easy as exporting from a module. Importing an exported declaration is done through using one of the \emph{import} forms below:
+
+\begin{enumerate}
+\item Import a single export from a module
+\item Import the entire module into a single variable, and use it to access the module exports
+\item Import a module for side-effects only
+\end{enumerate}
+
+Though not recommended practice, some modules set up some global state that can be used by other modules. These modules may not have any exports, or the consumer is not interested in any of their exports.
+\subsection{Default exports}
+Each module can optionally export a \emph{default} export. Default exports are marked with the keyword \emph{default}; and there can only be one \emph{default} export per module. \emph{default} exports are imported using a different import form.
+\emph{default} exports are really handy. For instance, a library like jQuery might have a default export of \emph{jQuery} or \$, which we’d probably also import under the name \$ or jQuery.
+\par
+Classes and function declarations can be authored directly as default exports. Default export class and function declaration names are optional.
+\subsection{\emph{export =} and \emph{import = require()}}
+Both CommonJS and AMD generally have the concept of an \emph{exports} object which contains all exports from a module.
+\par
+They also support replacing the \emph{exports} object with a custom single object. Default exports are meant to act as a replacement for this behavior; however, the two are incompatible. TypeScript supports \emph{export =} to model the traditional CommonJS and AMD workflow.
+\par
+The \emph{export =} syntax specifies a single object that is exported from the module. This can be a class, interface, namespace, function, or enum.
+\par
+When exporting a module using \emph{export =}, TypeScript-specific \emph{import module = require("module")} must be used to import the module.
+
+\subsection{Code Generation for Modules}
+Depending on the module target specified during compilation, the compiler will generate appropriate code for Node.js (\textbf{CommonJS}), require.js (\textbf{AMD}), \textbf{UMD}, \textbf{SystemJS}, or \textbf{ECMAScript 2015 native modules} (ES6) module-loading systems. For more information on what the \emph{define}, \emph{require} and \emph{register} calls in the generated code do, consult the documentation for each module loader.
+
+\subsection{Optional Module Loading and Other Advanced Loading Scenarios}
+In some cases, you may want to only load a module under some conditions. In TypeScript, we can use the pattern shown below to implement this and other advanced loading scenarios to directly invoke the module loaders without losing type safety.
+\par
+The compiler detects whether each module is used in the emitted JavaScript. If a module identifier is only ever used as part of a type annotations and never as an expression, then no \emph{require} call is emitted for that module. This elision of unused references is a good performance optimization, and also allows for optional loading of those modules.
+The core idea of the pattern is that the \emph{import id = require("...")} statement gives us access to the types exposed by the module. The module loader is invoked (through \emph{require}) dynamically, as shown in the if blocks below. This leverages the reference-elision optimization so that the module is only loaded when needed. For this pattern to work, it’s important that the symbol defined via an \emph{import} is only used in type positions (i.e. never in a position that would be emitted into the JavaScript).
+To maintain type safety, we can use the \emph{typeof} keyword. The \emph{typeof} keyword, when used in a type position, produces the type of a value, in this case the type of the module.
+
 \section{Name space in TypeScript}
 
 \section{Difference and relation between modules and name spaces in TypeScript}
