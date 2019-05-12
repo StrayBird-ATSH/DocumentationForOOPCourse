@@ -252,12 +252,42 @@ Modules also have a dependency on a module loader (such as CommonJs/Require.js).
 It is also worth noting that, for Node.js applications, modules are the default and the recommended approach to structure your code.
 \par
 Starting with ECMAScript 2015, modules are native part of the language, and should be supported by all compliant engine implementations. Thus, for new projects modules would be the recommended code organization mechanism.
-\section{Internal Linkage in C++}
-
-\section{External Linkage in C++}
-
+\section{Internal Linkage in C}
+If the declaration of a file-scope identifier for an object or a function contains the \textbf{storage-class-specifier} \emph{static}, the identifier has internal linkage. Otherwise, the identifier has external linkage. 
+\par
+Within one translation unit, each instance of an identifier with internal linkage denotes the same identifier or function. Internally linked identifiers are unique to a translation unit.
+\section{External Linkage in C}
+If the first declaration at file-scope level for an identifier does not use the \emph{static} storage-class specifier, the object has external linkage.
+\par
+If the declaration of an identifier for a function has no \textbf{storage-class-specifier}, its linkage is determined exactly as if it were declared with the \textbf{storage-class-specifier} \emph{extern}. If the declaration of an identifier for an object has file scope and no \textbf{storage-class-specifier}, its linkage is external.
+An identifier's name with external linkage designates the same function or data object as does any other declaration for the same name with external linkage. The two declarations can be in the same translation unit or in different translation units. If the object or function also has global lifetime, the object or function is shared by the entire program.
 \section{Name space in C++}
-
+\subsection{Introduction}
+A namespace is a declarative region that provides a scope to the identifiers (the names of types, functions, variables, etc) inside it. Namespaces are used to organize code into logical groups and to prevent name collisions that can occur especially when your code base includes multiple libraries. All identifiers at namespace scope are visible to one another without qualification. Identifiers outside the namespace can access the members by using the fully qualified name for each identifier, for example \emph{std::vector<std::string> vec;}, or else by a using Declaration for a single identifier (\emph{using std::string}), or a using Directive for all the identifiers in the namespace (\emph{using namespace std;}). Code in header files should always use the fully qualified namespace name.
+\subsection{\emph{using} directives}
+The \emph{using} directive allows all the names in a \emph{namespace} to be used without the \textbf{namespace-name} as an explicit qualifier. Use a using directive in an implementation file (i.e. *.cpp) if you are using several different identifiers in a namespace; if you are just using one or two identifiers, then consider a using declaration to only bring those identifiers into scope and not all the identifiers in the namespace. If a local variable has the same name as a namespace variable, the namespace variable is hidden. It is an error to have a namespace variable with the same name as a global variable.
+\subsection{Declaring namespaces and namespace members}
+Typically, you declare a namespace in a header file. If your function implementations are in a separate file, then qualify the function names.
+\par
+A namespace can be declared in multiple blocks in a single file, and in multiple files. The compiler joins the parts together during preprocessing and the resulting namespace contains all the members declared in all the parts. An example of this is the std namespace which is declared in each of the header files in the standard library.
+\par
+Members of a named namespace can be defined outside the namespace in which they are declared by explicit qualification of the name being defined. However, the definition must appear after the point of declaration in a namespace that encloses the declaration's namespace.
+\subsection{The global namespace}
+If an identifier is not declared in an explicit namespace, it is part of the implicit global namespace. In general, try to avoid making declarations at global scope when possible, except for the entry point main Function, which is required to be in the global namespace. To explicitly qualify a global identifier, use the scope resolution operator with no name, as in \emph{::SomeFunction(x);}. This will differentiate the identifier from anything with the same name in any other namespace, and it will also help to make your code easier for others to understand.
+\subsection{The std namespace}
+All C++ standard library types and functions are declared in the \emph{std} namespace or namespaces nested inside \emph{std}.
+\subsection{Nested namespaces}
+Namespaces may be nested. An ordinary nested namespace has unqualified access to its parent’s members, but the parent members do not have unqualified access to the nested namespace (unless it is declared as inline).
+\par
+Ordinary nested namespaces can be used to encapsulate internal implementation details that are not part of the public interface of the parent namespace.
+\subsection{Inline namespaces (C++ 11)}
+In contrast to an ordinary nested namespace, members of an inline namespace are treated as members of the parent namespace. This characteristic enables argument dependent lookup on overloaded functions to work on functions that have overloads in a parent and a nested inline namespace. It also enables you to declare a specialization in a parent namespace for a template that is declared in the inline namespace.
+\par
+You can use inline namespaces as a versioning mechanism to manage changes to the public interface of a library. For example, you can create a single parent namespace, and encapsulate each version of the interface in its own namespace nested inside the parent. The namespace that holds the most recent or preferred version is qualified as inline, and is therefore exposed as if it were a direct member of the parent namespace. Client code that invokes the Parent::Class will automatically bind to the new code. Clients that prefer to use the older version can still access it by using the fully qualified path to the nested namespace that has that code.
+\par
+The inline keyword must be applied to the first declaration of the namespace in a compilation unit.
+\subsection{Namespace aliases}
+Namespace names need to be unique, which means that often they should not be too short. If the length of a name makes code difficult to read, or is tedious to type in a header file where using directives can’t be used, then you can make a namespace alias which serves as an abbreviation for the actual name.
 \section{Difference and relation between TypeScript module and C++ internal linkage}
 
 \section{Difference and relation between TypeScript module and C++ external linkage}
