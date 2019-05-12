@@ -212,7 +212,7 @@ The \emph{export =} syntax specifies a single object that is exported from the m
 When exporting a module using \emph{export =}, TypeScript-specific \emph{import module = require("module")} must be used to import the module.
 
 \subsection{Code Generation for Modules}
-Depending on the module target specified during compilation, the compiler will generate appropriate code for Node.js (\textbf{CommonJS}), require.js (\textbf{AMD}), \textbf{UMD}, \textbf{SystemJS}, or \textbf{ECMAScript 2015 native modules} (ES6) module-loading systems. For more information on what the \emph{define}, \emph{require} and \emph{register} calls in the generated code do, consult the documentation for each module loader.
+Depending on the module target specified during compilation, the compiler will generate appropriate code for Node.js (\textbf{CommonJS}), require.js (\textbf{AMD}), \textbf{UMD}, \textbf{SystemJS}, or \textbf{ECMAScript 2015 native modules} (ES6) module-loading systems. 
 
 \subsection{Optional Module Loading and Other Advanced Loading Scenarios}
 In some cases, you may want to only load a module under some conditions. In TypeScript, we can use the pattern shown below to implement this and other advanced loading scenarios to directly invoke the module loaders without losing type safety.
@@ -289,19 +289,42 @@ The inline keyword must be applied to the first declaration of the namespace in 
 \subsection{Namespace aliases}
 Namespace names need to be unique, which means that often they should not be too short. If the length of a name makes code difficult to read, or is tedious to type in a header file where using directives can’t be used, then you can make a namespace alias which serves as an abbreviation for the actual name.
 \section{Difference and relation between TypeScript module and C++ internal linkage}
-
+There is no obvious relationship between module in TypeScript and internal linkage in C++. Nevertheless, the usage of internal linkage has something similar to the variables defined inside a module in TypeScript. 
+\par
+An internal linking variable in C++ has its scope inside the file or the translation unit; while any variable inside a module in TypeScript has its scope inside this module and invisible to any member outside the module unless they are explicitly using one of the \emph{export} forms. Hence this indicates both the similarity and the difference between a module in TypeScript and internal linkage in C++: both are visible to the specified scope while a variable in a module in TypeScript can be explicitly exported while an internal linking variable in C++ can never be exported again.
 \section{Difference and relation between TypeScript module and C++ external linkage}
-
+As stated in the previous section above, we can see the similarity and difference between the module in TypeScript and external linkage in C++. The module itself has nothing to do with the external linkage in C++ while the variables in a module in TypeScript can have similar behavior as the external linking variables in C++. 
+\par
+The external linkage makes use of the variables defined somewhere else; similarly, when importing an module, we are also utilizing the variables defined somewhere else. However, there are still several distinct differences between the external linkage and the module import. As have been described in the several previous sections, importation in TypeScript can  have several forms and could be used in freedom at a rather large scale. That is, we can specify whether we want to import a variable, a function, or several of them or the entire module. We can also specify any one of them an alias when importing, while in C++ we can only link one function or variable at a time, unable to change the name of it.
 \section{Difference and relation between TypeScript module and C++ name space}
+A module has great similarity with C++ name space -- they are designed with the same purpose, actually. Both of them are designed to cope with the problem of naming conflict. Both variables in a module and variables in a name space could be accessed via the corresponding module or name space. 
+\par
+However, they have some more distinctions in detail. 
+\begin{enumerate}
+\item Each module in TypeScript is at file level. That is, any file containing a top-level \emph{import} or \emph{export} is considered a module. Conversely, any file without a top-level \emph{import} or \emph{export} is not a module. However, in C++, name space does not have to have relationship with file. In a file, there can be several name spaces without interacting with each other. 
+\item
+In C++, name space has a weak relationship with files, that is, they are actually decoupled from each other. Any file can declare using any name space. When including files, the compiler will not care about which name space the file is using. And we can call functions by addressing their name space without importing any specific name space. However, in TypeScript, a  module is coupled with a file and a file with \emph{import} or \emph{export} is a module. Since there is no including directive in TypeScript, importing an module is the process of importing an file. In addition, we can specify what contents the import and what alias we want to use.
+\item
+Unlike C++, where during the process of importing, all the contents of the imported file are copied into the destination, TypeScript can choose what contents to import and what to be left.
+\item
+In TypeScript, there is the mechanism of a \emph{default export}, where such mechanism is missing in C++. However, it is not needed because C++ importing allows everything accessible.
+\end{enumerate}
+\par
 
 \section{Difference and relation between TypeScript name space and C++ internal linkage}
-
+Just like the relationship between TypeScript module and C++ internal linkage, TypeScript name space and C++ internal linkage are two different objects but the variables inside a TypeScript name space and the variables declared with internal linkage has something in common.
+\par
+A variable defined inside a TypeScript can only be accessed inside the name space so as to avoid collision, and the internal linking variables are accessible in its scope. However, there are some distinctions between the scopes of the two things. A name space can go across various files and the functions and variables can be exported towards outside the name space. Nevertheless, in C++ internal linkage, the scope is strictly defined to be inside the translation unit and no more addition modifier is allowed.
 \section{Difference and relation between TypeScript name space and C++ external linkage}
-
+Just like the relationship between TypeScript module and C++ external linkage, TypeScript name space and C++ external linkage are two different objects but the variables inside a TypeScript name space and the variables declared with external linkage has something in common.
+\par
+Variables inside a name space in TypeScript can be shared and accessible to the codes with the same name space, or exported so that can be used in other name spaces. However, in C++, the variables only need to be declared to be \emph{external} variables and then it can be used if it is actually defined somewhere else. 
 \section{Difference and relation between TypeScript name space and C++ name space}
+The name space in TypeScript and name space in C++ have great in common, especially from the perspectives of purpose of design and functions. Therefore, the similarity of TypeScript name space and the C++ name space is omitted here and only differences are mentioned.
+\par
+In TypeScript name space, visibility mechanism is utilized so that developers can choose what are visible to the codes outside the name space and what are visible. However, in C++ everything in a name space is visible to the codes declaring using the same name space.
 
 \begin{thebibliography}{A}
-
 \bibitem{1}
 Wikipedia contributors. (2019, May 5). TypeScript. In \emph{Wikipedia, The Free Encyclopedia}. Retrieved 08:23, May 11, 2019, from \url{https://en.wikipedia.org/w/index.php?title=TypeScript&oldid=895568490}
 
