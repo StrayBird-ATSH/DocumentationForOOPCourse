@@ -114,7 +114,7 @@ As to another part of this lab, the printing result of \emph{variable2}, is a ty
 \par
 More specifically, in this project, the variable \emph{variable2} is declared in \emph{header.h} with an \emph{external} keyword, indicating that this variable will be defined somewhere else in this project. Then in the file \emph{main.cpp} this variable is defined. Therefore, this is a typical example of global variable and all the functions are modifying the same version of the variable. Therefore, the \emph{main} function will print the result after being changed in the other functions.
 
-\section{Task 1.2: External declaration with definition at the same place}
+\section{Task 1.2: Duplicate variable definition}
 The result of the change is shown in the Figure \ref{2} below, indicating an compiling error.
 
 
@@ -125,7 +125,7 @@ The result of the change is shown in the Figure \ref{2} below, indicating an com
 \end{figure}
 
 
-As per have stated above, an \emph{extern} keyword indicates that this variable is defined somewhere else in this file, hence it cannot be used the same time as definition. Therefore, such change will lead to a compiling error.
+In this example, we have two places both defining the variable \emph{variable2}. Therefore, the compiler will report a duplicate definition error.
 \section{Task 1.3: External declaration without definition}
 
 The result of the change is shown in the Figure \ref{3} below, indicating an compiling error.
@@ -222,6 +222,20 @@ The core idea of the pattern is that the \emph{import id = require("...")} state
 To maintain type safety, we can use the \emph{typeof} keyword. The \emph{typeof} keyword, when used in a type position, produces the type of a value, in this case the type of the module.
 
 \section{Name space in TypeScript}
+\subsection{Introduction}
+In this subsection I will try to outline the various ways to organize the code using namespaces (previously “internal modules”) in TypeScript. As per alluded in previous section's note about terminology, ``internal modules'' are now referred to as “namespaces”. Additionally, anywhere the module keyword was used when declaring an internal module, the namespace keyword can and should be used instead. This avoids confusing new users by overloading them with similarly named terms.
+\subsection{Namespacing}
+As we have more and more methods of the same or of similiar functions, we're going to want to have some kind of organization scheme so that we can keep track of our types and not worry about name collisions with other objects. Instead of putting lots of different names into the global namespace, we can wrap up our objects into a namespace.
+\par
+If we want the interfaces and classes in the namespace to be visible outside the namespace, we can preface them with export. Conversely, the implementation details can be left unexported and will not be visible to code outside the namespace. 
+\subsection{Splitting Across Files}
+As our application grows, we’ll want to split the code across multiple files to make it easier to maintain.
+\subsubsection{Multi-file namespaces}
+We can split our namespace across many files. Even though the files are separate, they can each contribute to the same namespace and can be consumed as if they were all defined in one place. Because there are dependencies between files, we’ll add reference tags to tell the compiler about the relationships between the files.
+\subsection{Aliases}
+Another way that you can simplify working with namespaces is to use \emph{import q = x.y.z} to create shorter names for commonly-used objects. Not to be confused with the \emph{import x = require("name")} syntax used to load modules, this syntax simply creates an alias for the specified symbol. We can use these sorts of imports (commonly referred to as aliases) for any kind of identifier, including objects created from module imports.
+\par
+Notice that we don’t use the \emph{require} keyword; instead we assign directly from the qualified name of the symbol we’re importing. This is similar to using \emph{var}, but also works on the type and namespace meanings of the imported symbol. Importantly, for values, \emph{import} is a distinct reference from the original symbol, so changes to an aliased \emph{var} will not be reflected in the original variable.
 
 \section{Difference and relation between modules and name spaces in TypeScript}
 
