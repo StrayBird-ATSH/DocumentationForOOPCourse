@@ -1,0 +1,148 @@
+\documentclass[a4paper]{report}
+\pagestyle{headings}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{color}
+\lstset{language=bash}
+\lstset{numbers=right}
+\lstset{breaklines}
+\title{Lab Report for Object-oriented Programming course \newline
+ Lab 4: Big Integer Matrix}
+\author{Wang, Chen \\ 16307110064 \\ School of Software\\ Fudan University}
+\date{\today}
+\bibliographystyle{plain}
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\chapter{Requirements of this Lab \& Functions of this application}
+In this lab, we are required to realize a matrix supporting big integers that that utilizes the operator overloading function in C++.
+\par
+More specifically, the application we designed should satisfy the characteristics in the following sections.
+\section{Operator overloading and implementation}
+We need to implement a 3 by 3 matrix class that supports large numbers and overload the following operators:
+\par
++: Add two matrices
+\par
+-: subtraction of two matrices
+\par 
+*: Multiply two matrices (e.g: A*B)
+\par
+*: Multiply a constant by a matrix (e.g. 3*A)
+\par
+\textasciitilde : Transpose of a matrix
+\section{Expression evaluation}
+The application should support for compound expressions (without parentheses). Such as: A+B-C, A+B*C, A+B+=C, etc.
+\section{Operator priority handling}
+We need to consider the operator priority.
+\par
+Priority: \textasciitilde \textgreater * \textgreater +, -
+\chapter{Task completion in my application}
+My hand in version of the application accomplishes all the requirements above.
+\chapter{Correctness validation for my application}
+My application correctly handles the following expressions below, which are from the Teaching Assistance's public result validation methods. 
+The validation expressions and test results are attached along with the documentation.
+\chapter{Platform specification}
+This application runs well on both Windows systems and Linux systems. Below are the specifications of the running platform and compiling environment.
+\section{Windows Platform}
+\subsection{Compiling environments}
+\begin{enumerate}
+\item
+\textbf{Environment:} MinGW version 5.2
+\item
+\textbf{CMake:} JetBrains CLion bundled CMake version 3.14.4
+\item
+\textbf{CMake C++ Standard} 17
+\end{enumerate}
+\subsection{System environments}
+[System Summary]
+\par
+Item	Value	
+\par
+OS Name	Microsoft Windows 10 Pro	
+\par
+Version	10.0.17763 Build 17763	
+\par
+Other OS Description 	Not Available	
+\par
+OS Manufacturer	Microsoft Corporation	
+\par
+System Name	DESKTOP-QNL9V7R	
+\par
+System Manufacturer	LENOVO	
+\par
+System Model	80W0	
+\par
+System Type	x64-based PC	
+\par
+System SKU	LENOVO\_MT\_80W0\_BU\_idea\_FM\_Lenovo XiaoXin Air 13 Pro	
+\par
+Processor	Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz, 2601 Mhz, 2 Core(s), 4 Logical Processor(s)	
+\par
+BIOS Version/Date	LENOVO 3GCN24WW(V2.05X), 3/8/2018	
+\par
+SMBIOS Version	2.8	
+\par
+Embedded Controller Version	2.24	
+\par
+BIOS Mode	UEFI	
+\par
+BaseBoard Manufacturer	LENOVO	
+\par
+BaseBoard Product	Lenovo XiaoXin A	
+\par
+BaseBoard Version	SDK0K09938 WIN	
+\par
+Platform Role	Mobile	
+\par
+Secure Boot State	Off	
+\par
+PCR7 Configuration	Elevation Required to View	
+\par
+Windows Directory	C:$\backslash$Windows	
+\par
+System Directory	C:$\backslash$Windows$\backslash$system32	
+\par
+Boot Device	$\backslash$Device$\backslash$HarddiskVolume1	
+\par
+Locale	 China	
+\par 
+Hardware Abstraction Layer	Version = "10.0.17763.503"	
+\par
+User Name	DESKTOP-QNL9V7R$\backslash$zhang	
+\par
+Time Zone	China Standard Time	
+\par
+Installed Physical Memory (RAM)	8.00 GB	
+\par
+Total Physical Memory	7.85 GB	
+\par
+Available Physical Memory	1.39 GB	
+\par
+Total Virtual Memory	10.5 GB	
+\par
+Available Virtual Memory	1.26 GB	
+\par
+Page File Space	2.60 GB	
+\par
+Page File	C:$\backslash$pagefile.sys	
+\par
+Kernel DMA Protection	Off	
+\par
+Virtualization-based security	Running	
+\par
+Virtualization-based security Required Security Properties		
+\par
+Virtualization-based security Available Security Properties	 Base Virtualization Support, DMA Protection
+\par	
+Virtualization-based security Services Configured	Hypervisor enforced Code Integrity	
+\par
+Virtualization-based security Services Running	Hypervisor enforced Code Integrity	
+\par
+Device Encryption Support	Elevation Required to View	
+\par
+
+\end{document} 
