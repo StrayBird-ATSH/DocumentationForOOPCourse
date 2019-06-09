@@ -96,15 +96,25 @@ the sake of copy constructors, an empty constructor is also designed.
 \subsection{The Matrix object}
 \begin{lstlisting}[language=C++]
 matrix() = default;
+
 ~matrix() = default;
+
 explicit matrix(std::string matrix[]);
+
 friend const matrix operator+(matrix &left, matrix &right);
+
 friend const matrix operator-(const matrix &left, const matrix &right);
+
 friend const matrix operator*(const matrix &left, const matrix &right);
+
 friend const matrix operator*(const bigInteger &bigNum, const matrix &right);
+
 friend const matrix operator~(const matrix &right);
+
 friend matrix &operator+=(matrix &left, const matrix &right);
+
 friend matrix &operator-=(matrix &left, const matrix &right);
+
 friend std::ostream &operator<<(std::ostream &stream, const matrix &matrix1);
 \end{lstlisting}
 
@@ -112,16 +122,91 @@ friend std::ostream &operator<<(std::ostream &stream, const matrix &matrix1);
 
 \begin{lstlisting}[language=C++]
 bigInteger() = default;
+
+/**
+ * Standard constructor of the class.
+ * The string argument is directly moved to the field as 
+ * the construction process.
+ * @code{move} method is used to avoid copying and 
+ * to enhance performance
+ * @param number The string representation of the number
+ */
 explicit bigInteger(std::string number);
+
+/**
+ * This overloading operator is not required but its 
+ * implementation can simplify the codes in other 
+ * places
+ * @param other The addend
+ * @return The result of the addition
+ */
 bigInteger &operator+=(const bigInteger &other);
+
+/**
+ * The implementation of the addition of two big 
+ * integers.
+ * @param lAddend One of the addends
+ * @param rAddend One of the addends
+ * @return The result of the addition as a big integer
+ * object
+ */
 friend bigInteger operator+(bigInteger b1, const bigInteger &b2);
+
+/**
+ * The implementation method of the subtraction 
+ * operation.
+ * @param minuend The minuend
+ * @param subtrahend The subtrahend
+ * @return The result of the subtraction as a big integer
+ * object
+ */
 friend bigInteger operator-(bigInteger b1, const bigInteger &b2);
+
+/**
+ * The implementation method of the multiplication 
+ * operation.
+ * @param lMultiplier One of the multipliers
+ * @param rMultiplier One of the multipliers
+ * @return The result of the subtraction as a big integer
+ * object
+ */
 friend bigInteger operator*(bigInteger b1, const bigInteger &b2);
+
+/**
+ * The method is used to output the object as a stream.
+ * This function is used in the process of printing this
+ * object.
+ * @param os Any type of output stream object
+ * @param num The big integer object to be output
+ * @return The modified stream
+ */
 friend std::ostream &operator<<(std::ostream &os, const bigInteger &num);
+
+/**
+ * The implementation of determining whether two big
+ * integers are equal.
+ * The equality of string is used directly for the
+ * determination.
+ * However, this method assumes that the given two
+ * numbers are valid and don't have circumstances
+ * like have leading zeros. Considering this method
+ * is only used inside this class, further improvement
+ * is neglected for the sake of performance.
+ * @param n1 One of the numbers
+ * @param n2 The other of the numbers
+ * @return true if the two numbers are equal and false
+ * otherwise
+ */
 friend bool operator==(bigInteger b1, const bigInteger &b2);
 \end{lstlisting}
+\section{Notes about the ambiguous requirements in this Lab}
 
-
+\subsection{Supported Operators}
+The += and -= operator is not accomplished in this Lab for test case perspectives. However, these two operators are implemented in the matrix class. They are not tested.
+\subsection{Result validation}
+The test cases of this lab is provided by the teaching assistance from the classes of \textbf{SOFT130059.01 Object Oriented Programming(Zhang, Tiange) Spring Term of 2018-2019 academic year}, whose lab assignment is identical to ours except that they require the += and -= operators. I just removed the two lines containing the += and -= operators and keep the other lines the same. My version of output result has been compared with the version from their teaching assistance and the comparison result is identical.
+\subsection{Compiling method}
+Both \emph{Makefile} and \emph{CMakeLists.txt} are provided for compiling. Nevertheless, \emph{CMakeLists.txt} is preferred because it is highly environment independent and can guarantee that it the compiling process is smooth across various platforms. If \emph{Makefile} must be used, the environment arguments in the Makefile should be modified according to the system to enable correct compilation.
 \chapter{Correctness validation for my application}
 My application correctly handles the following expressions below, which are from the Teaching Assistance's public result validation methods. 
 The validation expressions and test results are attached along with the documentation.
